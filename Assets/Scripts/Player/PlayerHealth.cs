@@ -20,11 +20,12 @@ public class PlayerHealth : Entity
 
     void VisualizeDamageTaken(float damage)
     {
-        Color colour = Color.white;
-
+        Color colour = Color.red;
+       
         GameObject prefab = Instantiate(hitDamageNumberPrefab, this.gameObject.transform);
-        prefab.GetComponent<TextMeshProUGUI>().color = colour;
-        prefab.GetComponent<TextMeshProUGUI>().text = Mathf.Round(damage).ToString();
+        HitDamageNumbers script = prefab.GetComponent<HitDamageNumbers>();
+
+        script.SetUpHitDamageNumbers(damage, colour);
     }
 
     public override void EntityDeath()

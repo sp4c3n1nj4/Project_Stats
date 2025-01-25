@@ -8,7 +8,7 @@ public class Enemy : Entity
     public Dictionary<DropType, float> OnDeathDrops;
     //movement
     public float moveSpeed;
-    public AItype aItype;
+    public AItype aitype;
     //attack
     public float attackDamage;
     public float attackSpeed;
@@ -16,7 +16,17 @@ public class Enemy : Entity
 
     private void Start()
     {
-        EnemyManager.Enemies.Add(gameObject);
+        TrySetUpMovement();
+        //EnemyManager.Enemies.Add(gameObject);
+    }
+
+    private void TrySetUpMovement()
+    {
+        AIMovement aiMovement;
+        if (gameObject.TryGetComponent(out aiMovement))
+        {
+            aiMovement.SetUpMovementValues(moveSpeed, aitype, gameObject.GetComponent<Rigidbody2D>());
+        }
     }
 
     public override void EntityDeath()
@@ -24,13 +34,6 @@ public class Enemy : Entity
         DropOnDeath();
         EnemyManager.Enemies.Remove(gameObject);
         Destroy(gameObject);
-    }
-
-    public override void Update()
-    {
-        base.Update();
-        //do movement
-        //do attack
     }
 
     private void DropOnDeath()
@@ -42,6 +45,8 @@ public class Enemy : Entity
                 case DropType.Experience:
                     break;
                 case DropType.Gold:
+                    break;
+                case DropType.Healing:
                     break;
                 case DropType.Loot1:
                     break;

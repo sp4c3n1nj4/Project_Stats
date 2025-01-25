@@ -22,3 +22,8 @@ public enum DropType
     Healing,
     Loot1
 }
+
+public class EnemyConstants
+{
+    public const float EnemyAggroRange = 20f;
+}
