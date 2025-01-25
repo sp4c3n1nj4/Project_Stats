@@ -20,7 +20,8 @@ public class UIPlayerStatComponent : MonoBehaviour
 
     public void StatUpButton()
     {
-        PlayerStatsCounter.IncreaseStat(statKey, 1);
+        PlayerStatsCounter.TrySpendStatPoint(statKey,1);
+        GetComponentInParent<UIPlayerStats>().UpdateText();
         UpdateText();
     }
 }

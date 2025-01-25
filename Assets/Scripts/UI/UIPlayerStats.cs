@@ -9,10 +9,18 @@ public class UIPlayerStats : MonoBehaviour
     private GameObject playerStatUIObject;
     [SerializeField]
     private Transform playerStatsUIContent;
+    [SerializeField]
+    private TextMeshProUGUI playerLevelText, playerStatPointText;
+
+    private void Start()
+    {
+        PlayerExperience.PlayerLevelUp.AddListener(UpdateText);
+    }
 
     private void OnEnable()
     {
         PopulateStatList();
+        UpdateText();
     }
 
     private void OnDisable()
@@ -21,6 +29,12 @@ public class UIPlayerStats : MonoBehaviour
         {
             Destroy(playerStatsUIContent.transform.GetChild(i).gameObject);
         }
+    }
+
+    public void UpdateText(int level = 1)
+    {
+        playerLevelText.text = "Level: " + PlayerExperience.playerLevel.ToString();
+        playerStatPointText.text = "Stat Point: " + PlayerExperience.playerStatPoints.ToString();
     }
 
     private void PopulateStatList()

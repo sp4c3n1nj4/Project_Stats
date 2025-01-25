@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public HashSet<GameObject> Enemies;
+    public static HashSet<GameObject> Enemies;
 
     private GameObject[] EnemyPrefabs;
 }

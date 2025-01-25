@@ -7,24 +7,22 @@ using UnityEngine.UI;
 public class PlayerExperienceVisualizer : MonoBehaviour
 {
     [SerializeField]
-    PlayerExperience playerExperience;
-    [SerializeField]
     Slider slider;
     [SerializeField]
     TextMeshProUGUI TextMeshPro;
 
     void Start()
     {
-        playerExperience.PlayerExpGain.AddListener(OnExpGain);
+        PlayerExperience.PlayerExpGain.AddListener(OnExpGain);
     }
 
-    private void OnExpGain(float currentExp, float maxExp)
+    private void OnExpGain(float currentExp)
     {
-        float expPercentage = currentExp / maxExp;
+        float expPercentage = currentExp / PlayerExperience.CurrentLevelExperienceRequirement();
         Mathf.Clamp(expPercentage, 0, 1);
         
         slider.value = expPercentage;
 
-        TextMeshPro.text = currentExp.ToString() + " / " + maxExp.ToString();
+        TextMeshPro.text = currentExp.ToString() + " / " + PlayerExperience.CurrentLevelExperienceRequirement().ToString();
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public float health;
+    public float maxHealth;
 
     public virtual void Update()
     {
@@ -18,8 +20,13 @@ public class Entity : MonoBehaviour
     }
 
     //base function of take damage function
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
-        
+        health -= damage;
+        Mathf.Clamp(health,0,maxHealth);
+        if (health == 0)
+        {
+            EntityDeath();
+        }
     }
 }

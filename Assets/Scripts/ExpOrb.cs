@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ExpOrb : MonoBehaviour
 {
-    float ExpValue = 1;
+    [SerializeField]
+    private float ExpValue = 1;
     float PickUpRadius = 2;
     [SerializeField]
     private float PickUpDeleteDistance = 0.2f;

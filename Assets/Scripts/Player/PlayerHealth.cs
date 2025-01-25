@@ -11,20 +11,20 @@ public class PlayerHealth : Entity
     [SerializeField]
     private GameObject hitDamageNumberPrefab;
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
 
         VisualizeDamageTaken(damage);   
     }
 
-    void VisualizeDamageTaken(int damage)
+    void VisualizeDamageTaken(float damage)
     {
         Color colour = Color.white;
 
         GameObject prefab = Instantiate(hitDamageNumberPrefab, this.gameObject.transform);
         prefab.GetComponent<TextMeshProUGUI>().color = colour;
-        prefab.GetComponent<TextMeshProUGUI>().text = damage.ToString();
+        prefab.GetComponent<TextMeshProUGUI>().text = Mathf.Round(damage).ToString();
     }
 
     public override void EntityDeath()

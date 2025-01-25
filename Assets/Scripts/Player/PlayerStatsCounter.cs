@@ -72,6 +72,19 @@ public class PlayerStatsCounter : MonoBehaviour
         Instance.UpdatePlayerStats();
     }
 
+    public static void TrySpendStatPoint(Enum stat, int value)
+    {
+        if (PlayerExperience.playerStatPoints < value)
+        {
+            throw new Exception("Not Enough Stat Points to do this");
+        }
+        else if(PlayerExperience.playerStatPoints >= value)
+        {
+            PlayerExperience.playerStatPoints -= value;
+            IncreaseStat(stat, value);
+        }
+    }
+
     public void DecreaseStat(Enum stat, int value)
     {
         if (!PlayerStatistics.ContainsKey(stat))
