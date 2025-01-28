@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private GameObject movementAim;
+
     InputAction moveAction;
     Vector2 moveVector;
 
@@ -30,5 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = moveVector * speed;
+
+        movementAim.transform.rotation = Quaternion.Euler(0, 0, -(Mathf.Atan2(moveVector.x, moveVector.y)) * Mathf.Rad2Deg);
     }
 }
