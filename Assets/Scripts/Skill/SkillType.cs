@@ -8,6 +8,12 @@ public enum SkillType
     Thrust
 }
 
+public enum AimType
+{
+    movementAim,
+    mouseAim
+}
+
 public enum AItype
 {
     Hug,
