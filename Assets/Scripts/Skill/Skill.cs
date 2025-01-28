@@ -11,6 +11,9 @@ public class Skill : MonoBehaviour
     private float timer = 0;
     public float hitBoxActiveSeconds = 1;
 
+    public float damage;
+    public BaseStats[] stats;
+
     public PolygonCollider2D hitBox;
 
     private void Update()
@@ -18,11 +21,11 @@ public class Skill : MonoBehaviour
         SkillTimer();
     }
 
-    public int CalculateDamage()
+    public float CalculateDamage()
     {
-        int damage = 0;
+        float _damage = damage;
         //need to implement stat scaling here
-        return damage;
+        return _damage;
     }
 
     public void SkillTimer()
@@ -45,5 +48,17 @@ public class Skill : MonoBehaviour
         hitBox.enabled = true;
         yield return new WaitForSeconds(seconds);
         hitBox.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Entity entity;
+        if (!collision.gameObject.CompareTag("Enemy"))
+            return;
+        if (collision.gameObject.TryGetComponent(out entity))
+        {
+            entity.TakeDamage(CalculateDamage());
+            print("Hit enemy");
+        }
     }
 }
